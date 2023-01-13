@@ -1,25 +1,23 @@
 <script setup lang="ts">
 import useEmoji from "@/hooks/useEmoji";
-const props = withDefaults(
-	defineProps<{
-		avatarUrl: string;
-		userName: string;
-		isVip: boolean;
-		level: number;
-		content: string;
-		time: string;
-		agreeCount: number;
-	}>(),
-	{
-		avatarUrl: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif",
-		userName: "bili_123456789",
-		isVip: false,
-		level: 0,
-		content: `阿里！？纳西！？纳西！？阿里！？崔铁路崔铁奶啊咧斗气斗气创死创死创，阿里！？纳西！？纳西！？阿里！？几噶几噶后开[吃瓜]`,
-		time: "2023-01-13 0:16",
-		agreeCount: 0
-	}
-);
+interface Props {
+	avatarUrl: string;
+	userName: string;
+	isVip: boolean;
+	level: number;
+	content: string;
+	time: string;
+	agreeCount: number;
+}
+const props = withDefaults(defineProps<Props>(), {
+	avatarUrl: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif",
+	userName: "bili_123456789",
+	isVip: false,
+	level: 0,
+	content: `阿里！？纳西！？纳西！？阿里！？崔铁路崔铁奶啊咧斗气斗气创死创死创，阿里！？纳西！？纳西！？阿里！？几噶几噶后开[吃瓜]`,
+	time: "2023-01-13 0:16",
+	agreeCount: 0
+});
 const { emojiMap, largeEmojiSet } = useEmoji();
 function parseStr(value: string) {
 	const reg = /\[.+?\]/g;

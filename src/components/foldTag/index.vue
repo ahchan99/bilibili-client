@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import hashStr from "@/utils/hashStr";
-const props = defineProps({
-	tagList: {
-		type: Array<String>,
-		default: []
-	},
-	baseUrl: {
-		type: String,
-		default: "#"
-	}
+interface Props {
+	tagList: Array<String>;
+	baseUrl?: string;
+}
+const props = withDefaults(defineProps<Props>(), {
+	baseUrl: "#"
 });
 
 const isExpanded = ref(false);

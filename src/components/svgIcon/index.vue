@@ -1,19 +1,17 @@
 <script setup lang="ts">
-const props = withDefaults(
-	defineProps<{
-		prefix?: string;
-		name: string;
-		color?: string;
-		width?: number;
-		height?: number;
-	}>(),
-	{
-		prefix: "icon",
-		color: "#333",
-		width: 18,
-		height: 18
-	}
-);
+interface Props {
+	prefix?: string;
+	name: string;
+	color?: string;
+	width?: number;
+	height?: number;
+}
+const props = withDefaults(defineProps<Props>(), {
+	prefix: "icon",
+	color: "#333",
+	width: 18,
+	height: 18
+});
 const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 </script>
 

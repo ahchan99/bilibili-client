@@ -3,16 +3,11 @@ import Danmaku from "@nplayer/danmaku";
 import { usePlayer } from "./usePlayer";
 import { BulletOption } from "types/bullet";
 import "./index.scss";
-const props = defineProps({
-	src: {
-		type: String,
-		default: null
-	},
-	bullets: {
-		type: Array<BulletOption>,
-		default: [{ time: 1, text: "弹幕～" }]
-	}
-});
+interface Props {
+	src: string;
+	bullets: Array<BulletOption>;
+}
+const props = defineProps<Props>();
 const { mirrorSwitch, quantitySelector, speedSelector, playStatePlugin, danmakuPlugin, volumePlugin, themePlugin } = usePlayer();
 </script>
 

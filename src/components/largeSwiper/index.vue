@@ -2,19 +2,14 @@
 import { PosterOption } from "types/poster";
 import hashStr from "@/utils/hashStr";
 import useImageMainColor from "@/hooks/useImageMainColor";
-const props = defineProps({
-	posterList: {
-		type: Array<PosterOption>,
-		default: []
-	},
-	animeTime: {
-		type: Number,
-		default: 250
-	},
-	intervalTime: {
-		type: Number,
-		default: 3000
-	}
+interface Props {
+	posterList: Array<PosterOption>;
+	animeTime?: number;
+	intervalTime?: number;
+}
+const props = withDefaults(defineProps<Props>(), {
+	animeTime: 250,
+	intervalTime: 3000
 });
 const nowIndex = ref(0);
 const swiperDom = ref<HTMLDivElement>();
