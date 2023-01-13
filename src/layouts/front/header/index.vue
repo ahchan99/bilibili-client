@@ -40,7 +40,7 @@ watch(
 		<ul class="entry-container mr-4">
 			<HeaderLeftEntry :isFixed="isFixed" />
 		</ul>
-		<div class="entry-container flex-auto">
+		<div class="entry-container flex-1">
 			<HeaderSearch />
 		</div>
 		<ul class="entry-container ml-4 justify-end">
@@ -52,7 +52,7 @@ watch(
 <style lang="scss">
 .layout-header {
 	--text-color: white;
-	@apply absolute flex items-center justify-between z-50 w-full h-16;
+	@apply absolute flex items-center justify-between z-50 w-full min-w-webside h-16;
 	&.layout-header__fixed {
 		@keyframes fixed {
 			from {

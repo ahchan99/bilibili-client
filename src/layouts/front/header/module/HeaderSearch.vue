@@ -44,7 +44,7 @@ function search(keyword?: any) {
 .search-box {
 	position: relative;
 	width: 100%;
-	min-width: 180px;
+	min-width: 150px;
 	max-width: 500px;
 	margin: 0 auto;
 	border-radius: 8px;
@@ -237,7 +237,6 @@ function search(keyword?: any) {
 		z-index: 1;
 		display: block;
 		height: 40px;
-		padding: 0 48px 0 4px;
 		overflow: hidden;
 		line-height: 38px;
 		background-color: #f1f2f3;

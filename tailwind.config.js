@@ -5,7 +5,10 @@ module.exports = {
 		extend: {
 			minWidth: {
 				mobile: "350px",
-				webside: "1120px"
+				webside: "1050px"
+			},
+			screens: {
+				base: "1080px"
 			},
 			fontSize: {
 				tiny: "13px"

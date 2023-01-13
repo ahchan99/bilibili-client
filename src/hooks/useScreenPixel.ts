@@ -5,6 +5,7 @@ export function useScreenPixel() {
 		md: 768,
 		cmd: 766,
 		lg: 1024,
+		base: 1080,
 		xl: 1280,
 		"2xl": 1536
 	});
@@ -13,6 +14,7 @@ export function useScreenPixel() {
 	const cmd = breakpoints.between("sm", "cmd");
 	const gtMd = breakpoints.greater("md");
 	const lg = breakpoints.between("md", "lg");
+	const gtBase = breakpoints.greater("base");
 	const xl = breakpoints.between("lg", "xl");
 	const xxl = breakpoints.between("xl", "2xl");
 	const xxxl = breakpoints["2xl"];
@@ -23,6 +25,7 @@ export function useScreenPixel() {
 		cmd,
 		gtMd,
 		lg,
+		gtBase,
 		xl,
 		xxl,
 		xxxl

@@ -36,7 +36,7 @@ const isCollapse = computed(() => {
 	border-right: none;
 }
 .admin-menu {
-	@apply w-[250px] duration-500 dark:bg-black min-h-screen h-full border-r border-solid z-50;
+	@apply w-[250px] duration-500 min-h-screen h-full border-r border-solid z-50;
 	&.close {
 		@apply w-[70px] duration-500;
 	}

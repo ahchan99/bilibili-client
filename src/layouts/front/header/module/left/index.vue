@@ -1,10 +1,13 @@
 <script setup lang="ts">
-defineProps({
-	isFixed: {
-		type: Boolean,
-		default: false
-	}
-});
+import { useScreenPixel } from "@/hooks/useScreenPixel";
+const props = withDefaults(
+	defineProps<{
+		isFixed: boolean;
+	}>(),
+	{ isFixed: false }
+);
+const { gtBase } = useScreenPixel();
+const isShow = computed(() => gtBase.value || !props.isFixed);
 </script>
 
 <template>
@@ -36,7 +39,7 @@ defineProps({
 	<li class="entry-item">
 		<a class="entry-default" href="#"><span></span></a>
 	</li>
-	<li class="entry-item">
+	<li class="entry-item" v-show="isShow">
 		<a class="entry-title" href="#">
 			<SvgIcon name="download" class="entry-svg" :width="16" :height="16" />
 			<span>下载客户端</span>
