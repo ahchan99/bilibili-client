@@ -41,7 +41,7 @@ export default function useEmoji() {
 		return new URL(`${BASE_PATH}${value}`, import.meta.url).href;
 	}
 
-	onMounted(() => {
+	onBeforeMount(() => {
 		emojiList.value.forEach(emoji => {
 			let url = getUrl(`${emoji.id}/index.json`);
 			axios.get(url).then(res => {

@@ -35,7 +35,7 @@ function onPostClick() {}
 	<div class="flex flex-col w-full">
 		<div class="flex w-full">
 			<div class="flex justify-center items-center w-20 h-[50px]">
-				<el-avatar :size="40" :src="avatarUrl">
+				<el-avatar :size="48" :src="avatarUrl">
 					<img src="@/assets/imgs/avatar.gif" />
 				</el-avatar>
 			</div>

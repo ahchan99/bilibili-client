@@ -1,7 +1,9 @@
 :root {
 	--b-c-white-0: #ffffff;
 	--b-c-blue-0: #00aeec;
+	--b-c-blue-1: #008ac5;
 	--b-c-cyan-blue-0: #00bac5;
+	--b-c-cyan-blue-1: #40c5f1;
 	--b-c-pink-0: #fb7299;
 	--b-c-orange-0: #e58900;
 	--b-c-gray-0: #f6f7f8;
@@ -19,7 +21,7 @@
 	--b-c-text-secondly: var(--b-c-gray-7);
 	--b-c-text-thirdly: var(--b-c-gray-5);
 	--b-c-text-fourthly: var(--b-c-gray-3);
-	--b-c-text-link: var(--b-c-cyan-blue-0);
+	--b-c-text-link: var(--b-c-blue-1);
 	--b-c-text-notice: var(--b-c-orange-0);
 	--b-c-text-regular: var(--b-c-gray-7);
 	--b-c-text-active: var(--b-c-blue-0);
