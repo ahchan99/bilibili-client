@@ -6,6 +6,18 @@ export interface CommentOption {
 	content: string;
 	time: string;
 	agreeCount: number;
+	replyCount: number;
+	replyCurrentPage?: number;
+	replys?: Array<CommentReplyOption>;
+}
+
+export interface CommentReplyOption {
+	avatar: string;
+	userName: string;
 	replyName?: string;
-	subComments?: Array<CommentOption>;
+	isVip: boolean;
+	level: number;
+	content: string;
+	time: string;
+	agreeCount: number;
 }

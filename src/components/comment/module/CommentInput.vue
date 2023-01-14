@@ -1,9 +1,10 @@
 <script setup lang="ts">
-defineProps({
-	avatarUrl: {
-		type: String,
-		default: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif"
-	}
+interface Props {
+	avatar: string;
+	placeholder?: string;
+}
+withDefaults(defineProps<Props>(), {
+	placeholder: "发一条友善的评论"
 });
 const content = ref("");
 const isExpended = ref(false);
@@ -35,7 +36,7 @@ function onPostClick() {}
 	<div class="flex flex-col w-full">
 		<div class="flex w-full">
 			<div class="flex justify-center items-center w-20 h-[50px]">
-				<el-avatar :size="48" :src="avatarUrl">
+				<el-avatar :size="48" :src="avatar">
 					<img src="@/assets/imgs/avatar.gif" />
 				</el-avatar>
 			</div>
@@ -45,7 +46,7 @@ function onPostClick() {}
 					v-model="content"
 					resize="none"
 					type="textarea"
-					placeholder="发一条友善的评论"
+					:placeholder="placeholder"
 					@focus="onFocus"
 					@blur="onBlur"
 				/>

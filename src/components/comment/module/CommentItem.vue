@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { CommentOption } from "types/comment";
-import useCommentListItem from "./useCommentListItem";
-import CommentListItemChild from "./CommentListItemChild.vue";
+import useCommentItem from "./useCommentItem";
 interface Props {
 	comment: CommentOption;
 }
 const props = defineProps<Props>();
+defineEmits<{
+	(e: "openReplyInput", key: string): void;
+}>();
 let className =
 	"relative w-full text-primary overflow-hidden whitespace-pre-wrap align-baseline overflow-wrap break-word float-left";
-const { renderStr } = useCommentListItem();
+const { renderStr } = useCommentItem();
 const content = computed(() => renderStr(props.comment.content, className));
 function agree() {}
 function disagree() {}
-function reply() {}
 </script>
 
 <template>
@@ -42,14 +43,12 @@ function reply() {}
 					<span class="flex items-center cursor-pointer mr-[19px]" @click="disagree">
 						<SvgIcon class="mr-[5px] hover:text-blue-0" name="disagreeSmall" :width="16" :height="16" />
 					</span>
-					<span class="cursor-pointer hover:text-blue-0" @click="reply">回复</span>
+					<span class="cursor-pointer hover:text-blue-0" @click="$emit('openReplyInput', comment.userName)">回复</span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div v-if="comment.subComments != null" class="relative w-full pl-[72px]">
-		<CommentListItemChild v-for="(item, index) in comment.subComments" :key="index" :comment="item" />
-	</div>
+	<slot></slot>
 	<div class="ml-20 mt-3.5 border-gray-2 border-solid border-b" />
 </template>
 

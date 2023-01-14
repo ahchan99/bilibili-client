@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { CommentOption } from "types/comment";
-import useCommentListItem from "./useCommentListItem";
+import { CommentReplyOption } from "types/comment";
+import useCommentItem from "./useCommentItem";
 interface Props {
-	comment: CommentOption;
+	comment: CommentReplyOption;
 }
+defineEmits<{
+	(e: "openReplyInput", key: string): void;
+}>();
 const props = defineProps<Props>();
 let className = "text-primary text-[15px] leading-6 overflow-hidden whitespace-pre-wrap align-baseline overflow-wrap break-word";
-const { renderStr } = useCommentListItem();
+const { renderStr } = useCommentItem();
 const content = computed(() => renderStr(props.comment.content, className, props.comment.replyName));
 function agree() {}
 function disagree() {}
-function reply() {}
 </script>
 
 <template>
@@ -38,7 +40,7 @@ function reply() {}
 			<span class="flex items-center cursor-pointer mr-[19px]" @click="disagree">
 				<SvgIcon class="mr-[5px] hover:text-blue-0" name="disagreeSmall" :width="16" :height="16" />
 			</span>
-			<span class="cursor-pointer hover:text-blue-0" @click="reply">回复</span>
+			<span class="cursor-pointer hover:text-blue-0" @click="$emit('openReplyInput', comment.userName)">回复</span>
 		</div>
 	</div>
 </template>
