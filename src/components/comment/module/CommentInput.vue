@@ -57,11 +57,11 @@ function onPostClick() {}
 		</div>
 		<div class="flex w-full" v-show="isExpended">
 			<div class="flex justify-center items-center ml-20 mt-[5px]">
-				<Emoji :on-mousedown="onMousedown" @add-emoji="(val: string) => addText(val)">
+				<EmojiPopover :on-mousedown="onMousedown" @add-emoji="(val: string) => addText(val)">
 					<div class="expend-btn" @mousedown.enter="onMousedown" @click="onEmojiClick">
 						<SvgIcon name="emoji" :width="16" :height="16" />
 					</div>
-				</Emoji>
+				</EmojiPopover>
 				<div class="expend-btn ml-1.5" @mousedown.enter="onMousedown" @click="onCallClick">
 					<SvgIcon name="call" :width="16" :height="16" />
 				</div>

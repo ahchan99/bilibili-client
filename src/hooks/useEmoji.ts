@@ -23,7 +23,7 @@ export default function useEmoji() {
 			isLarge: false
 		},
 		{
-			id: "tvIcon",
+			id: "tv-old",
 			name: "小电视",
 			data: new Map(),
 			isLarge: true

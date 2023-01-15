@@ -7,7 +7,7 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import "@/style/base.scss";
 import NPlayer from "@nplayer/vue";
 import "virtual:svg-icons-register";
-import SvgIcon from "@/components/svgIcon/index.vue";
+import SvgIcon from "@/components/svg-icon/index.vue";
 import VueDOMPurifyHTML from "vue-dompurify-html";
 
 const app = createApp(App);
