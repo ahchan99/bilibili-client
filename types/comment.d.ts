@@ -1,23 +1,28 @@
+import { PageOption } from "./page";
+import { UserOption } from "./user";
+
 export interface CommentOption {
-	avatar: string;
-	userName: string;
-	isVip: boolean;
-	level: number;
+	id: string;
+	parentId: string;
 	content: string;
-	time: string;
-	agreeCount: number;
-	replyCount: number;
-	replyCurrentPage?: number;
-	replys?: Array<CommentReplyOption>;
+	createTime: string;
+	likeCount: number;
+	likeStatus: boolean;
+	user: UserOption;
+	replyPage?: PageOption;
+	replyUser?: UserOption;
+	replyList?: Array<CommentOption>;
 }
 
-export interface CommentReplyOption {
-	avatar: string;
-	userName: string;
-	replyName?: string;
-	isVip: boolean;
-	level: number;
+export interface CommentSubmitParam {
 	content: string;
-	time: string;
-	agreeCount: number;
+	parentId: string;
+	targetId: string;
+	finish: (comment: CommentOption) => void;
+}
+
+export interface CommentInputSubmitParam {
+	content: string;
+	parentId: string;
+	finish: () => void;
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps({
-	agreeCount: {
+	likeCount: {
 		type: Number,
 		default: 0
 	},
@@ -24,8 +24,8 @@ function onClick() {}
 	<div class="toolbar-container">
 		<div class="toolbar-side w-[60%]">
 			<span title="点赞" class="toolbar-item w-[92px] mr-2" @click="onClick()">
-				<SvgIcon class="mr-2" name="agree" :width="28" :height="28" />
-				{{ agreeCount }}
+				<SvgIcon class="mr-2" name="like" :width="28" :height="28" />
+				{{ likeCount }}
 			</span>
 			<span title="投币" class="toolbar-item w-[92px] mr-2" @click="onClick()">
 				<SvgIcon class="mr-2" name="coin" :width="28" :height="28" />

@@ -1,35 +1,37 @@
 <script setup lang="ts">
+import { isEmpty, isNull } from "@/utils/object";
+import { CommentInputSubmitParam } from "types/comment";
 interface Props {
 	avatar: string;
+	parentId?: string;
 	placeholder?: string;
 }
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
+	parentId: "",
 	placeholder: "发一条友善的评论"
 });
+const emit = defineEmits<{
+	(e: "submit", { content, parentId, finish }: CommentInputSubmitParam): void;
+}>();
 const content = ref("");
 const isExpended = ref(false);
-const inputRef = ref();
 
-function addText(val: string) {
-	content.value = content.value.concat(val);
-}
-
-function onFocus() {
-	isExpended.value = true;
-}
-function onBlur() {
-	isExpended.value = false;
+function onSubmit() {
+	if (isEmpty(content.value)) {
+		return;
+	}
+	emit("submit", {
+		content: content.value,
+		parentId: isNull(props.parentId, null),
+		finish: () => {
+			content.value = "";
+		}
+	});
 }
 
 function onMousedown(e: MouseEvent) {
 	e.preventDefault();
 }
-
-function onEmojiClick() {}
-function onCallClick() {
-	addText("@");
-}
-function onPostClick() {}
 </script>
 
 <template>
@@ -42,27 +44,26 @@ function onPostClick() {}
 			</div>
 			<div class="flex justify-center flex-1" :style="{ height: `${isExpended ? 65 : 50}px` }">
 				<el-input
-					ref="inputRef"
 					v-model="content"
 					resize="none"
 					type="textarea"
 					:placeholder="placeholder"
-					@focus="onFocus"
-					@blur="onBlur"
+					@focus="() => (isExpended = true)"
+					@blur="() => (isExpended = false)"
 				/>
 			</div>
 			<div class="flex justify-center items-center ml-2.5 w-[70px]" :style="{ height: `${isExpended ? 65 : 50}px` }">
-				<el-button @mousedown.enter="onMousedown" @click="onPostClick"> 发布 </el-button>
+				<el-button @mousedown.enter="onMousedown" @click="onSubmit"> 发布 </el-button>
 			</div>
 		</div>
 		<div class="flex w-full" v-show="isExpended">
 			<div class="flex justify-center items-center ml-20 mt-[5px]">
-				<EmojiPopover :on-mousedown="onMousedown" @add-emoji="(val: string) => addText(val)">
-					<div class="expend-btn" @mousedown.enter="onMousedown" @click="onEmojiClick">
+				<EmojiPopover :on-mousedown="onMousedown" @add-emoji="val => (content = content.concat(val))">
+					<div class="expend-btn" @mousedown.enter="onMousedown">
 						<SvgIcon name="emoji" :width="16" :height="16" />
 					</div>
 				</EmojiPopover>
-				<div class="expend-btn ml-1.5" @mousedown.enter="onMousedown" @click="onCallClick">
+				<div class="expend-btn ml-1.5" @mousedown.enter="onMousedown">
 					<SvgIcon name="call" :width="16" :height="16" />
 				</div>
 			</div>
