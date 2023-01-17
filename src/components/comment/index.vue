@@ -2,21 +2,24 @@
 import CommentInput from "./module/CommentInput.vue";
 import CommentItem from "./module/CommentItem.vue";
 import CommentSubItem from "./module/CommentSubItem.vue";
+import CommentToolbar from "./module/CommentToolbar.vue";
 import { CommentOption, CommentSubmitParam, CommentInputSubmitParam } from "types/comment";
 import { UserOption } from "types/user";
 import { PageOption } from "types/page";
 import hashStr from "@/utils/hashStr";
 import { isNull, isEmpty } from "@/utils/object";
 interface Props {
-	total?: number; // 评论总数
-	data?: Array<CommentOption>;
+	total: number; // 评论总数
+	data: Array<CommentOption>;
 	load: () => void;
+	id?: string;
 	avatar?: string;
 	replyShowNum?: number; // 回复默认显示数
 	replyPageNum?: number; // 回复分页显示数
 	bufferTime?: number;
 }
 const props = withDefaults(defineProps<Props>(), {
+	id: "",
 	avatar: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif",
 	total: 0,
 	data: () => [],
@@ -98,43 +101,43 @@ const onCurrentChange = (val: number) => {
 	<div class="flex flex-col w-full">
 		<CommentInput :avatar="avatar" @submit="onSubmit" />
 		<div class="pt-3.5 w-full overflow-auto" v-infinite-scroll="onLoad" :infinite-scroll-disabled="isDisabled">
-			<CommentItem
-				v-for="(comment, index) in data"
-				:key="index"
-				:comment="comment"
-				@open-reply="user => onOpenReply(user, index)"
-			>
-				<div v-if="comment.replyList != null" class="relative w-full pl-[72px]">
-					<CommentSubItem
-						v-for="(reply, subIndex) in comment.replyList"
-						:key="subIndex"
-						:comment="reply"
-						@open-reply="user => onOpenReply(user, index)"
-					/>
-				</div>
-				<div v-if="!isEmpty(comment.replyPage) && comment.replyPage!.total > replyShowNum" class="relative w-full pl-[72px]">
-					<div v-if="!isExpended" class="text-thirdly text-tiny pl-2">
-						<span>共{{ comment.replyPage!.total }}条回复, </span>
-						<span class="cursor-pointer hover:text-link" @click="() => (isExpended = true)">点击查看</span>
+			<CommentItem v-for="(comment, index) in data" :key="index" :comment="comment">
+				<template #toolbar>
+					<CommentToolbar :comment="comment" @open-reply="user => onOpenReply(user, index)" />
+				</template>
+				<template #bottom>
+					<div v-if="!isEmpty(comment.replyList)" class="relative w-full pl-[72px]">
+						<CommentSubItem v-for="(reply, subIndex) in comment.replyList" :key="subIndex" :comment="reply">
+							<template #toolbar>
+								<CommentToolbar :comment="reply" :offset="7" @open-reply="user => onOpenReply(user, index)" />
+							</template>
+						</CommentSubItem>
 					</div>
-					<div v-else class="pl-2">
-						<el-pagination
-							class="page"
-							v-model:current-page="comment.replyPage!.pageNum"
-							v-model:page-size="replyPageNum"
-							:hide-on-single-page="true"
-							:total="comment.replyPage!.total"
-							layout="prev, pager, next"
-							:small="true"
-							@current-change="onCurrentChange"
-							prev-text="上一页"
-							next-text="下一页"
-						/>
+					<div v-if="!isEmpty(comment.replyPage) && comment.replyPage!.total > replyShowNum" class="relative w-full pl-[72px]">
+						<div v-if="!isExpended" class="text-thirdly text-tiny pl-2">
+							<span>共{{ comment.replyPage!.total }}条回复, </span>
+							<span class="cursor-pointer hover:text-link" @click="() => (isExpended = true)">点击查看</span>
+						</div>
+						<div v-else class="pl-2">
+							<el-pagination
+								class="page"
+								v-model:current-page="comment.replyPage!.pageNum"
+								v-model:page-size="replyPageNum"
+								:hide-on-single-page="true"
+								:total="comment.replyPage!.total"
+								layout="prev, pager, next"
+								:small="true"
+								@current-change="onCurrentChange"
+								prev-text="上一页"
+								next-text="下一页"
+							/>
+						</div>
 					</div>
-				</div>
-				<div v-if="replyKey === hashStr(index.toString(), `reply`)" class="pt-[25px] pb-[10px] pl-[80px] pr-0">
-					<CommentInput :avatar="avatar" :parent-id="comment.id" :placeholder="`@${replyName}`" @submit="onSubmit" />
-				</div>
+					<div v-if="replyKey === hashStr(index.toString(), `reply`)" class="pt-[25px] pb-[10px] pl-[80px] pr-0">
+						<CommentInput :avatar="avatar" :parent-id="comment.id" :placeholder="`@${replyName}`" @submit="onSubmit" />
+					</div>
+					<div class="ml-20 mt-3.5 border-gray-2 border-solid border-b" />
+				</template>
 			</CommentItem>
 			<div v-show="isLoading" class="tip-text">正在加载...</div>
 			<div v-show="isFinished" class="tip-text">没有更多评论</div>
