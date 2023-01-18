@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { CommentOption } from "@/types/comment";
-import { UserOption } from "@/types/user";
+import { CommentProps } from "@/types/comment";
+import { UserProps } from "@/types/user";
 interface Props {
-	comment: CommentOption;
+	comment: CommentProps;
 	offset?: number;
 }
 withDefaults(defineProps<Props>(), {
 	offset: 2
 });
 defineEmits<{
-	(e: "replyOpen", user: UserOption): void;
+	(e: "replyOpen", user: UserProps): void;
 	(e: "like", id: string): void;
 	(e: "dislike", id: string): void;
 }>();

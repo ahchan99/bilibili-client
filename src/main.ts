@@ -6,7 +6,7 @@ import "@/style/base.scss";
 import NPlayer from "@nplayer/vue";
 import "virtual:svg-icons-register";
 import VueDOMPurifyHTML from "vue-dompurify-html";
-import { setupPlugins } from "./plugins";
+import { setupPlugins } from "./plugin";
 
 const app = createApp(App);
 setupPlugins(app);

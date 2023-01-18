@@ -1,4 +1,4 @@
-export interface PageOption {
+export interface PageProps {
 	total: number;
 	pageNum: number;
 	pageSize?: number;

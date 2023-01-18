@@ -1,4 +1,4 @@
-export interface PosterOption {
+export interface PosterProps {
 	id: string;
 	name: string;
 	path: string;

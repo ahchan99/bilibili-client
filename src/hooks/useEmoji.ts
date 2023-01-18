@@ -1,9 +1,14 @@
 import axios from "axios";
-import { EmojiOption } from "@/types/emoji";
+interface Props {
+	id: string;
+	name: string;
+	data: Map<string, string>;
+	isLarge: boolean;
+}
 export default function useEmoji() {
 	const emojiMap = ref<Map<string, string>>(new Map());
 	const largeEmojiSet = ref<Set<string>>(new Set());
-	const emojiList = ref<Array<EmojiOption>>([
+	const emojiList = ref<Array<Props>>([
 		{
 			id: "face",
 			name: "小黄脸",

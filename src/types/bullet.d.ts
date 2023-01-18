@@ -1,4 +1,4 @@
-export interface BulletOption {
+export interface BulletProps {
 	color?: string; // 弹幕颜色
 	text: string; // 弹幕文字
 	time: number; // 弹幕出现时间

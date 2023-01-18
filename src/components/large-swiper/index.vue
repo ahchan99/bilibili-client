@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { PosterOption } from "@/types/poster";
+import { PosterProps } from "@/types/poster";
 import hashStr from "@/utils/hashStr";
 import useImageMainColor from "@/hooks/useImageMainColor";
 interface Props {
-	posterList: Array<PosterOption>;
+	posterList: Array<PosterProps>;
 	animeTime?: number;
 	intervalTime?: number;
 }
@@ -20,7 +20,7 @@ const iconDom = ref<HTMLDivElement>();
 const moveWidth = ref(0);
 const oldMoveWidth = ref<number>();
 const spotShowNum = ref(7);
-const posterRenderList = ref<Array<PosterOption>>([
+const posterRenderList = ref<Array<PosterProps>>([
 	props.posterList[props.posterList.length - 1],
 	...props.posterList,
 	props.posterList[0]
