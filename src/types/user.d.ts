@@ -6,9 +6,7 @@ export interface UserOption {
 	isVip?: boolean;
 }
 
-export interface UserStoreInfo extends UserOption {
-	token: string;
-	isLogin: boolean;
+export interface UserInfo extends UserOption {
 	permission: string;
 	roleList: string[];
 }

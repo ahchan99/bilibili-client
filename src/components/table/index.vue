@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CTableColumn } from "types/table";
+import { CTableColumn } from "@/types/table";
 import { useTable } from "./useTable";
 import TableHead from "./module/TableHead.vue";
 

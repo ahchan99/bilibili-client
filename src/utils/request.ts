@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { getToken } from "@/utils/cookies";
 import { useMessage } from "@/hooks/useMessage";
-import { Response } from "types/response";
+import { Response } from "@/types/response";
 
 // 创建axios
 const service = axios.create({

@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import { DataTable } from "types/dataTable";
+import { DataTable } from "@/types/dataTable";
 
 class DataTableFactory<T, U> {
 	dataSource = ref<T[]>([]);

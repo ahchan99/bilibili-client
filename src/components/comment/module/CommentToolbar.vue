@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CommentOption } from "types/comment";
-import { UserOption } from "types/user";
+import { CommentOption } from "@/types/comment";
+import { UserOption } from "@/types/user";
 interface Props {
 	comment: CommentOption;
 	offset?: number;

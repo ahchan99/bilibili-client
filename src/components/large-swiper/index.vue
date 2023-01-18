@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PosterOption } from "types/poster";
+import { PosterOption } from "@/types/poster";
 import hashStr from "@/utils/hashStr";
 import useImageMainColor from "@/hooks/useImageMainColor";
 interface Props {

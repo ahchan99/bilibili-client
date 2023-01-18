@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { isEmpty, isNull } from "@/utils/object";
-import { CommentInputSubmitParam } from "types/comment";
+import { CommentInputSubmitParam } from "@/types/comment";
 import { userStore } from "@/stores/user";
 interface Props {
 	parentId?: string;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CommentOption } from "types/comment";
+import { CommentOption } from "@/types/comment";
 import useCommentItem from "./useCommentItem";
 interface Props {
 	comment: CommentOption;

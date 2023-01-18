@@ -1,6 +1,6 @@
 <!-- 用户管理 -->
 <script setup lang="ts">
-import { User } from "types/user";
+import { User } from "@/types/user";
 import { useDataTable } from "@/hooks/useDataTable";
 import { setupUserAttributes } from "./design";
 

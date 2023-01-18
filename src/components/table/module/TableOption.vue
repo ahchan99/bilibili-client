@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CTableColumn } from "types/table";
+import { CTableColumn } from "@/types/table";
 import { CheckboxValueType } from "element-plus";
 
 const modelValue = ref<string[]>([]);

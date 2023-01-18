@@ -1,4 +1,4 @@
-import { CTableColumn } from "types/table";
+import { CTableColumn } from "@/types/table";
 import { CheckboxValueType } from "element-plus";
 
 export function useTable<T>(column: CTableColumn<T>[]) {

@@ -3,9 +3,9 @@ import CommentInput from "./module/CommentInput.vue";
 import CommentItem from "./module/CommentItem.vue";
 import CommentSubItem from "./module/CommentSubItem.vue";
 import CommentToolbar from "./module/CommentToolbar.vue";
-import { CommentOption, CommentSubmitParam, CommentInputSubmitParam } from "types/comment";
-import { UserOption } from "types/user";
-import { PageOption } from "types/page";
+import { CommentOption, CommentSubmitParam, CommentInputSubmitParam } from "@/types/comment";
+import { UserOption } from "@/types/user";
+import { PageOption } from "@/types/page";
 import hashStr from "@/utils/hashStr";
 import { isNull, isEmpty } from "@/utils/object";
 interface Props {

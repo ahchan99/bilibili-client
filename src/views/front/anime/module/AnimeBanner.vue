@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PosterOption } from "types/poster";
+import { PosterOption } from "@/types/poster";
 const animePosterList = ref<Array<PosterOption>>([
 	{
 		id: "1",

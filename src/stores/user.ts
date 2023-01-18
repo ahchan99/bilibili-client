@@ -1,16 +1,15 @@
 import { defineStore } from "pinia";
 import { getToken, setToken, removeToken } from "@/utils/cookies";
-import { UserStoreInfo } from "types/user";
+import { UserInfo, UserLoginCmd } from "@/types/user";
 import { userLogin, userLogout, getUserInfo, getRSAPublicKey } from "@/api/user";
-import { UserLoginCmd } from "types/user";
 import JSEncrypt from "jsencrypt";
-import { isNull } from "@/utils/object";
+import { isEmpty, isNull } from "@/utils/object";
 
 export const userStore = defineStore("user", () => {
-	const info = ref<Partial<UserStoreInfo>>({
-		avatar: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif",
-		token: isNull(getToken(), "")
+	const info = ref<Partial<UserInfo>>({
+		avatar: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif"
 	});
+	const token = ref<string>(isNull(getToken(), ""));
 
 	const id = computed(() => {
 		return info.value!.id;
@@ -22,24 +21,23 @@ export const userStore = defineStore("user", () => {
 		return info.value!.avatar;
 	});
 	const isLogin = computed(() => {
-		return info.value!.isLogin;
+		return !isEmpty(token.value);
 	});
 
 	async function login(cmd: UserLoginCmd, success: () => void, error: (err: any) => void) {
 		try {
 			// rsa 加密
-			const { data: key } = await getRSAPublicKey();
+			const { data: rsaPublicKey } = await getRSAPublicKey();
 			let jsencrypt = new JSEncrypt();
-			jsencrypt.setPublicKey(key);
+			jsencrypt.setPublicKey(rsaPublicKey);
 			cmd.password = jsencrypt.encrypt(cmd.password) as string;
 
-			const { data: token } = await userLogin(cmd);
-			if (token) {
-				setToken(token);
+			const { data: authToken } = await userLogin(cmd);
+			if (authToken) {
+				setToken(authToken);
+				token.value = authToken;
 				const { data: userInfo } = await getUserInfo();
 				info.value = userInfo;
-				info.value.token = token;
-				info.value.isLogin = true;
 				success();
 			}
 		} catch (err) {
@@ -49,8 +47,7 @@ export const userStore = defineStore("user", () => {
 	async function logout(success: () => void, error: (err: any) => void) {
 		try {
 			await userLogout();
-			info.value.token = "";
-			info.value.isLogin = false;
+			token.value = "";
 			removeToken();
 			success();
 		} catch (err) {

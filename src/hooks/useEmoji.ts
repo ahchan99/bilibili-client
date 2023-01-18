@@ -1,5 +1,5 @@
 import axios from "axios";
-import { EmojiOption } from "types/emoji";
+import { EmojiOption } from "@/types/emoji";
 export default function useEmoji() {
 	const emojiMap = ref<Map<string, string>>(new Map());
 	const largeEmojiSet = ref<Set<string>>(new Set());
