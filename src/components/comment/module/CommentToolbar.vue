@@ -9,7 +9,7 @@ withDefaults(defineProps<Props>(), {
 	offset: 2
 });
 defineEmits<{
-	(e: "openReply", user: UserOption): void;
+	(e: "replyOpen", user: UserOption): void;
 	(e: "like", id: string): void;
 	(e: "dislike", id: string): void;
 }>();
@@ -25,7 +25,7 @@ defineEmits<{
 		<span class="flex items-center cursor-pointer mr-[19px]" @click="$emit(`dislike`, comment.id)">
 			<SvgIcon class="mr-[5px] hover:text-blue-0" name="dislikeSmall" :width="16" :height="16" />
 		</span>
-		<span class="cursor-pointer hover:text-blue-0" @click="$emit('openReply', comment.user)">回复</span>
+		<span class="cursor-pointer hover:text-blue-0" @click="$emit('replyOpen', comment.user)">回复</span>
 	</div>
 </template>
 

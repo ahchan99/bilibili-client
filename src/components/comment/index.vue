@@ -12,15 +12,11 @@ interface Props {
 	total: number; // 评论总数
 	data: Array<CommentOption>;
 	load: () => void;
-	id?: string;
-	avatar?: string;
 	replyShowNum?: number; // 回复默认显示数
 	replyPageNum?: number; // 回复分页显示数
 	bufferTime?: number;
 }
 const props = withDefaults(defineProps<Props>(), {
-	id: "",
-	avatar: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif",
 	total: 0,
 	data: () => [],
 	replyShowNum: 2,
@@ -30,6 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
 	(e: "submit", { content, parentId, targetId, finish }: CommentSubmitParam): void;
 	(e: "like", id: string, finish: () => void): void;
+	(e: "dislike", id: string, finish: () => void): void;
 	(e: "replyPage", parentId: string, page: PageOption, finish: () => void): void;
 }>();
 const isExpended = ref(false);
@@ -40,7 +37,7 @@ const replyKey = ref("");
 const replyId = ref("");
 const replyName = ref("");
 
-function onOpenReply(user: UserOption, index: number) {
+function onReplyOpen(user: UserOption, index: number) {
 	const key = hashStr(index.toString(), "reply");
 	// 点击第二次关闭
 	if (replyKey.value === key) {
@@ -92,6 +89,9 @@ function onSubmit(param: CommentInputSubmitParam) {
 	});
 }
 
+function onLike() {}
+function onDislike() {}
+
 const onCurrentChange = (val: number) => {
 	console.log(`current page: ${val}`);
 };
@@ -99,17 +99,29 @@ const onCurrentChange = (val: number) => {
 
 <template>
 	<div class="flex flex-col w-full">
-		<CommentInput :avatar="avatar" @submit="onSubmit" />
+		<CommentInput @submit="onSubmit" />
 		<div class="pt-3.5 w-full overflow-auto" v-infinite-scroll="onLoad" :infinite-scroll-disabled="isDisabled">
 			<CommentItem v-for="(comment, index) in data" :key="index" :comment="comment">
 				<template #toolbar>
-					<CommentToolbar :comment="comment" @open-reply="user => onOpenReply(user, index)" />
+					<CommentToolbar
+						:comment="comment"
+						:offset="2"
+						@reply-open="user => onReplyOpen(user, index)"
+						@like="onLike"
+						@dislike="onDislike"
+					/>
 				</template>
 				<template #bottom>
 					<div v-if="!isEmpty(comment.replyList)" class="relative w-full pl-[72px]">
 						<CommentSubItem v-for="(reply, subIndex) in comment.replyList" :key="subIndex" :comment="reply">
 							<template #toolbar>
-								<CommentToolbar :comment="reply" :offset="7" @open-reply="user => onOpenReply(user, index)" />
+								<CommentToolbar
+									:comment="reply"
+									:offset="7"
+									@reply-open="user => onReplyOpen(user, index)"
+									@like="onLike"
+									@dislike="onDislike"
+								/>
 							</template>
 						</CommentSubItem>
 					</div>
@@ -134,13 +146,13 @@ const onCurrentChange = (val: number) => {
 						</div>
 					</div>
 					<div v-if="replyKey === hashStr(index.toString(), `reply`)" class="pt-[25px] pb-[10px] pl-[80px] pr-0">
-						<CommentInput :avatar="avatar" :parent-id="comment.id" :placeholder="`@${replyName}`" @submit="onSubmit" />
+						<CommentInput :parent-id="comment.id" :placeholder="`@${replyName}`" @submit="onSubmit" />
 					</div>
 					<div class="ml-20 mt-3.5 border-gray-2 border-solid border-b" />
 				</template>
 			</CommentItem>
-			<div v-show="isLoading" class="tip-text">正在加载...</div>
-			<div v-show="isFinished" class="tip-text">没有更多评论</div>
+			<div v-show="isLoading" class="text-tip">正在加载...</div>
+			<div v-show="isFinished" class="text-tip">没有更多评论</div>
 		</div>
 	</div>
 </template>
@@ -162,7 +174,7 @@ const onCurrentChange = (val: number) => {
 		@apply text-tiny;
 	}
 }
-.tip-text {
+.text-tip {
 	@apply mt-5 pb-[100px] text-tiny text-thirdly text-center;
 }
 </style>

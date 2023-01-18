@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import { Response, DataTable } from "types/response";
+import { DataTable } from "types/dataTable";
 
 class DataTableFactory<T, U> {
 	dataSource = ref<T[]>([]);
@@ -46,13 +46,13 @@ export function useDataTable<T, U = any>(url: string) {
 		}
 		const params = getQueryParams();
 		loading.value = true;
-		return await request({
+		return await request<DataTable<T>>({
 			url: url,
 			method: "get",
 			params: params
 		}).then(res => {
-			dataSource.value = res.data.array;
-			pagination.value.total = (res as unknown as Response<DataTable<T>>).data!.total;
+			dataSource.value = res.data!.array as any[];
+			pagination.value.total = res.data!.total;
 			loading.value = false;
 		});
 	};

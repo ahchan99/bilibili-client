@@ -1,6 +1,7 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { getToken } from "@/utils/cookies";
 import { useMessage } from "@/hooks/useMessage";
+import { Response } from "types/response";
 
 // 创建axios
 const service = axios.create({
@@ -104,4 +105,14 @@ service.interceptors.response.use(
 	}
 );
 
-export default service;
+export default function request<T>(config: AxiosRequestConfig): Promise<Response<T>> {
+	return new Promise((resolve, reject) => {
+		service(config)
+			.then((response: any) => {
+				resolve(response);
+			})
+			.catch(error => {
+				reject(error);
+			});
+	});
+}

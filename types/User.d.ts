@@ -6,6 +6,20 @@ export interface UserOption {
 	isVip?: boolean;
 }
 
+export interface UserStoreInfo extends UserOption {
+	token: string;
+	isLogin: boolean;
+	permission: string;
+	roleList: string[];
+}
+
+export interface UserLoginCmd {
+	phone?: string;
+	email?: string;
+	password: string;
+	captcha?: string;
+}
+
 export interface User {
 	id?: number;
 	acount?: string;

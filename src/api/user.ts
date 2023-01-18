@@ -1,4 +1,27 @@
 import request from "@/utils/request";
+import { UserLoginCmd, UserStoreInfo } from "types/user";
+
+export function userLogin(cmd: UserLoginCmd) {
+	return request<string>({
+		url: "/user-tokens",
+		method: "Post",
+		data: cmd
+	});
+}
+
+export function userLogout() {
+	return request({
+		url: "/logout",
+		method: "post"
+	});
+}
+
+export function getUserInfo() {
+	return request<UserStoreInfo>({
+		url: "/user-infos",
+		method: "get"
+	});
+}
 
 export function getUserList() {
 	return request({
@@ -8,15 +31,8 @@ export function getUserList() {
 }
 
 export function getRSAPublicKey() {
-	return request({
+	return request<string>({
 		url: "/rsa-pks",
-		method: "get"
-	});
-}
-
-export function getUserInfo() {
-	return request({
-		url: "/user-infos",
 		method: "get"
 	});
 }
