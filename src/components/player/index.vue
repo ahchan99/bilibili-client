@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import Danmaku from "@nplayer/danmaku";
 import { usePlayer } from "./usePlayer";
-import { BulletProps } from "@/types/bullet";
+import { BulletProp } from "@/types/bullet";
 import "./index.scss";
 interface Props {
 	src: string;
-	bullets: Array<BulletProps>;
+	bullets: Array<BulletProp>;
 }
 const props = defineProps<Props>();
 const { mirrorSwitch, quantitySelector, speedSelector, playStatePlugin, danmakuPlugin, volumePlugin, themePlugin } = usePlayer();

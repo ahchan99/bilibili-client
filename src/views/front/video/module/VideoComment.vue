@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { CommentProps, CommentSubmitParam } from "@/types/comment";
+import { CommentProp, CommentSubmitParam } from "@/types/comment";
 import VideoCommentTab from "./VideoCommentTab.vue";
-const commentList = ref<Array<CommentProps>>([]);
+const commentList = ref<Array<CommentProp>>([]);
 const total = ref(0);
 const replyShowNum = 2;
 const replyPageNum = 10;
@@ -10,7 +10,7 @@ function onSubmit(param: CommentSubmitParam) {
 	let { content, parentId, targetId } = param;
 	console.log(content, parentId, targetId);
 	// 模拟添加评论
-	const com: CommentProps = {
+	const com: CommentProp = {
 		user: {
 			id: "1343",
 			avatar: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif",

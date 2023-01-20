@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { PosterProps } from "@/types/poster";
-const animePosterList = ref<Array<PosterProps>>([
+import { PosterProp } from "@/types/poster";
+const animePosterList = ref<Array<PosterProp>>([
 	{
 		id: "1",
 		name: "间谍过家家",

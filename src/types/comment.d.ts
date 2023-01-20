@@ -1,24 +1,24 @@
-import { PageProps } from "./page";
-import { UserProps } from "./user";
+import { PageProp } from "./page";
+import { UserProp } from "./user";
 
-export interface CommentProps {
+export interface CommentProp {
 	id: string;
 	parentId: string;
 	content: string;
 	createTime: string;
 	likeCount: number;
 	likeStatus: boolean;
-	user: UserProps;
-	replyPage?: PageProps;
-	replyUser?: UserProps;
-	replyList?: Array<CommentProps>;
+	user: UserProp;
+	replyPage?: PageProp;
+	replyUser?: UserProp;
+	replyList?: Array<CommentProp>;
 }
 
 export interface CommentSubmitParam {
 	content: string;
 	parentId: string;
 	targetId: string;
-	finish: (comment: CommentProps) => void;
+	finish: (comment: CommentProp) => void;
 }
 
 export interface CommentInputSubmitParam {

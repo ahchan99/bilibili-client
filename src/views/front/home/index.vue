@@ -5,7 +5,6 @@ import HomeBanner from "./module/HomeBanner.vue";
 
 <template>
 	<HomeBanner />
-	<LoginDialog />
 	<div class="h-[2000px]">首页</div>
 </template>
 

@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import { UserLoginCmd, UserInfo } from "@/types/user";
+import { UserLoginCmd, UserInfoProp } from "@/types/user";
 
 export function userLogin(cmd: UserLoginCmd) {
 	return request<string>({
@@ -17,7 +17,7 @@ export function userLogout() {
 }
 
 export function getUserInfo() {
-	return request<UserInfo>({
+	return request<UserInfoProp>({
 		url: "/user-infos",
 		method: "get"
 	});

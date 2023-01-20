@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import HeaderAvatar from "./module/HeaderAvatar.vue";
 import HeaderUpload from "./module/HeaderUpload.vue";
+import useLoginDialog from "@/hooks/useLoginDialog";
 </script>
 
 <template>
 	<li class="entry-item">
-		<a class="entry-outside" href="/login">
+		<span class="entry-outside cursor-pointer" @click="useLoginDialog">
 			<HeaderAvatar />
-		</a>
+		</span>
 	</li>
 	<li class="entry-item">
 		<a class="entry-outside" href="#">

@@ -181,7 +181,7 @@ export function usePlayer() {
 		apply(player: Player) {
 			const { $ } = player.Player.__utils;
 			this.el = player.el.appendChild($(`.state_icon`));
-			this.el.appendChild(useSvgIcon("playState", 64, 64));
+			this.el.appendChild(useSvgIcon("play_state", 64, 64));
 			player.on("Play", () => (this.el.style.display = "none"));
 			player.on("Pause", () => (this.el.style.display = "inline"));
 			this.el.addEventListener("click", () => {
@@ -203,7 +203,7 @@ export function usePlayer() {
 						const svgDom = path.parentNode as SVGElement;
 						const dom = svgDom.parentNode as HTMLDivElement;
 						dom.removeChild(svgDom);
-						dom.appendChild(useSvgIcon("danmakuSetting", 22, 22, ["nplayer-icon"]));
+						dom.appendChild(useSvgIcon("danmaku_setting", 22, 22, ["nplayer-icon"]));
 						return;
 					}
 				}
@@ -262,11 +262,11 @@ export function usePlayer() {
 			registerIcon("play", createIcon("play", 22, 22));
 			registerIcon("volume", createIcon("volume", 22, 22));
 			registerIcon("cog", createIcon("setting", 22, 22));
-			registerIcon("webEnterFullscreen", createIcon("webFullScreen", 22, 22));
-			registerIcon("enterFullscreen", createIcon("fullScreen", 22, 22));
+			registerIcon("webEnterFullscreen", createIcon("web_full_screen", 22, 22));
+			registerIcon("enterFullscreen", createIcon("full_screen", 22, 22));
 
-			player.opts.progressDot = createIcon("progressDot", 18, 18, true)("text-black");
-			player.opts.posterPlayEl = createIcon("playBig", 80, 80)();
+			player.opts.progressDot = createIcon("progress_dot", 18, 18, true)("text-black");
+			player.opts.posterPlayEl = createIcon("play_big", 80, 80)();
 		}
 	};
 

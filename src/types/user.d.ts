@@ -1,4 +1,4 @@
-export interface UserProps {
+export interface UserProp {
 	id: string;
 	name: string;
 	avatar?: string;
@@ -6,7 +6,7 @@ export interface UserProps {
 	isVip?: boolean;
 }
 
-export interface UserInfo extends UserProps {
+export interface UserInfoProp extends UserProp {
 	permission: string;
 	roleList: string[];
 }

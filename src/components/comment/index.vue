@@ -3,14 +3,14 @@ import CommentInput from "./module/CommentInput.vue";
 import CommentItem from "./module/CommentItem.vue";
 import CommentSubItem from "./module/CommentSubItem.vue";
 import CommentToolbar from "./module/CommentToolbar.vue";
-import { CommentProps, CommentSubmitParam, CommentInputSubmitParam } from "@/types/comment";
-import { UserProps } from "@/types/user";
-import { PageProps } from "@/types/page";
+import { CommentProp, CommentSubmitParam, CommentInputSubmitParam } from "@/types/comment";
+import { UserProp } from "@/types/user";
+import { PageProp } from "@/types/page";
 import hashStr from "@/utils/hashStr";
 import { isNull, isEmpty } from "@/utils/object";
 interface Props {
 	total: number; // 评论总数
-	data: Array<CommentProps>;
+	data: Array<CommentProp>;
 	load: () => void;
 	replyShowNum?: number; // 回复默认显示数
 	replyPageNum?: number; // 回复分页显示数
@@ -27,7 +27,7 @@ const emit = defineEmits<{
 	(e: "submit", { content, parentId, targetId, finish }: CommentSubmitParam): void;
 	(e: "like", id: string, finish: () => void): void;
 	(e: "dislike", id: string, finish: () => void): void;
-	(e: "replyPage", parentId: string, page: PageProps, finish: () => void): void;
+	(e: "replyPage", parentId: string, page: PageProp, finish: () => void): void;
 }>();
 const isExpended = ref(false);
 const isLoading = ref(false);
@@ -37,7 +37,7 @@ const replyKey = ref("");
 const replyId = ref("");
 const replyName = ref("");
 
-function onReplyOpen(user: UserProps, index: number) {
+function onReplyOpen(user: UserProp, index: number) {
 	const key = hashStr(index.toString(), "reply");
 	// 点击第二次关闭
 	if (replyKey.value === key) {
@@ -65,7 +65,7 @@ function onSubmit(param: CommentInputSubmitParam) {
 		content,
 		parentId: isNull(parentId, null), // 评论 or 回复
 		targetId: isNull(replyId.value, null), // 用户 id
-		finish: (comment: CommentProps) => {
+		finish: (comment: CommentProp) => {
 			// 回调添加数据
 			param.finish();
 			// 回复

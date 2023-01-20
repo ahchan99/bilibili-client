@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import { getToken, setToken, removeToken } from "@/utils/cookies";
-import { UserInfo, UserLoginCmd } from "@/types/user";
+import { UserInfoProp, UserLoginCmd } from "@/types/user";
 import { userLogin, userLogout, getUserInfo, getRSAPublicKey } from "@/api/user";
 import JSEncrypt from "jsencrypt";
 import { isEmpty, isNull } from "@/utils/object";
 
 export const userStore = defineStore("user", () => {
-	const info = ref<Partial<UserInfo>>({
+	const info = ref<Partial<UserInfoProp>>({
 		avatar: "https://s2.loli.net/2023/01/10/GFkXYWf6Csa3c5g.gif"
 	});
 	const token = ref<string>(isNull(getToken(), ""));

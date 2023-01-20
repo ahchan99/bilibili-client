@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { CommentProps } from "@/types/comment";
-import useCommentItem from "./useCommentItem";
+import { CommentProp } from "@/types/comment";
+import useComment from "./useComment";
 interface Props {
-	comment: CommentProps;
+	comment: CommentProp;
 }
 const props = defineProps<Props>();
 let className = "text-primary text-[15px] leading-6 overflow-hidden whitespace-pre-wrap align-baseline break-words";
-const { renderStr } = useCommentItem();
+const { renderStr } = useComment();
 const content = computed(() => {
 	let replyname = props.comment.replyUser ? props.comment.replyUser.name : undefined;
 	return renderStr(props.comment.content, className, replyname);

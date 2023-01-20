@@ -1,6 +1,6 @@
 import useEmoji from "@/hooks/useEmoji";
 
-export default function useCommentListItem() {
+export default function useComment() {
 	const { emojiMap, largeEmojiSet } = useEmoji();
 
 	function renderStr(value: string, className: string, replyName?: string) {
