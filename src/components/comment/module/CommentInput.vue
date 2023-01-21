@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CommentInputEmojiPopover from "./CommentInputEmojiPopover.vue";
 import { isEmpty, isNull } from "@/utils/object";
 import { CommentInputSubmitParam } from "@/api/comment";
 import { userStore } from "@/store";
@@ -59,11 +60,11 @@ function onMousedown(e: MouseEvent) {
 		</div>
 		<div class="flex w-full" v-show="isExpended">
 			<div class="flex justify-center items-center ml-20 mt-[5px]">
-				<EmojiPopover :on-mousedown="onMousedown" @add-emoji="val => (content = content.concat(val))">
+				<CommentInputEmojiPopover :on-mousedown="onMousedown" @add-emoji="val => (content = content.concat(val))">
 					<div class="expend-btn" @mousedown.enter="onMousedown">
 						<SvgIcon name="emoji" :width="16" :height="16" />
 					</div>
-				</EmojiPopover>
+				</CommentInputEmojiPopover>
 				<div class="expend-btn ml-1.5" @mousedown.enter="onMousedown">
 					<SvgIcon name="call" :width="16" :height="16" />
 				</div>

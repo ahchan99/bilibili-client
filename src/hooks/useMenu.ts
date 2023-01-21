@@ -1,33 +1,16 @@
 import { useStorage } from "@vueuse/core";
 import { C } from "@/constants";
 import router from "@/router";
-import { RouteMeta, RouteLocationNormalizedLoaded, RouteRecordNormalized } from "vue-router";
-interface IMenu {
-	title?: string;
-	icon?: string;
-	priority?: number;
-	isClick?: boolean;
-	route?: string;
-	path?: string;
-	iframe_link?: string;
-	children?: IMenu[];
-}
-export interface Menu extends IMenu {
-	// 是否为嵌套路由
-	nested?: boolean;
-}
-export interface M extends RouteMeta {
-	menu?: Menu;
-}
+import { RouteLocationNormalizedLoaded, RouteRecordNormalized, RouteMenu, Menu } from "vue-router";
 const menus = ref<Menu[]>([]);
 const close = useStorage<boolean>(C.MENU_CLOSE_STATE, false);
 // 根据路由元数据构建菜单列表
 const getMenuByRoute = () => {
 	return router
 		.getRoutes()
-		.filter(route => route.children.length && route.meta.menu && !(route.meta as M)?.menu?.nested)
+		.filter(route => route.children.length && route.meta.menu && !(route.meta as RouteMenu)?.menu?.nested)
 		.map(route => {
-			const menu: Menu = { ...(route.meta as M)?.menu };
+			const menu: Menu = { ...(route.meta as RouteMenu)?.menu };
 			menu.children = filterNestedMenu(route.children);
 			return menu;
 		})
@@ -43,9 +26,9 @@ const filterNestedMenu = (children: RouteRecordNormalized["children"]): Menu[] =
 		.map(route => {
 			if (route.children) {
 				const childRoute = filterNestedMenu(route.children);
-				return { ...(route.meta as M)?.menu, route: route.name, children: childRoute };
+				return { ...(route.meta as RouteMenu)?.menu, route: route.name, children: childRoute };
 			}
-			return { ...(route.meta as M)?.menu, route: route.name };
+			return { ...(route.meta as RouteMenu)?.menu, route: route.name };
 		}) as Menu[];
 };
 // 遍历路由

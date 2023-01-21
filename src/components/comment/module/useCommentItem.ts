@@ -1,7 +1,7 @@
-import useEmoji from "@/hooks/useEmoji";
+import useCommentInputEmojiPopover from "@/components/comment/module/useCommentInputEmojiPopover";
 
 export default function useCommentItem() {
-	const { emojiMap, largeEmojiSet } = useEmoji();
+	const { emojiMap, largeEmojiSet } = useCommentInputEmojiPopover();
 
 	function renderStr(value: string, className: string, replyName?: string) {
 		const reg = /\[.+?\]/g;

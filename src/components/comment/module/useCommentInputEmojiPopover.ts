@@ -5,7 +5,7 @@ interface Props {
 	data: Map<string, string>;
 	isLarge: boolean;
 }
-export default function useEmoji() {
+export default function useCommentInputEmojiPopover() {
 	const emojiMap = ref<Map<string, string>>(new Map());
 	const largeEmojiSet = ref<Set<string>>(new Set());
 	const emojiList = ref<Array<Props>>([
@@ -42,7 +42,7 @@ export default function useEmoji() {
 	]);
 
 	function getUrl(value: string) {
-		const BASE_PATH = "../assets/emojis/";
+		const BASE_PATH = "../../../assets/emojis/";
 		return new URL(`${BASE_PATH}${value}`, import.meta.url).href;
 	}
 

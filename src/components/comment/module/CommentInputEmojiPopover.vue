@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useEmoji from "@/hooks/useEmoji";
+import useCommentInputEmojiPopover from "@/components/comment/module/useCommentInputEmojiPopover";
 withDefaults(
 	defineProps<{
 		onMousedown?: (payload: MouseEvent) => void;
@@ -11,7 +11,7 @@ withDefaults(
 defineEmits<{
 	(e: "addEmoji", key: string): void;
 }>();
-const { emojiList } = useEmoji();
+const { emojiList } = useCommentInputEmojiPopover();
 const title = ref(emojiList.value[0].name);
 onMounted(() => {});
 </script>

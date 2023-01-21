@@ -1,7 +1,7 @@
 <!-- 历史菜单 -->
 <script setup lang="ts">
 import { useTab } from "@/hooks/useTab";
-import { TabsPaneContext, TabPanelName } from "element-plus";
+import { TabsPaneContext, TabPaneName } from "element-plus";
 const { history, addHistoryTab, removeTab } = useTab();
 const route = useRoute();
 const router = useRouter();
@@ -19,7 +19,7 @@ watch(
 const tabClick = (tab: TabsPaneContext) => {
 	router.push({ name: tab.props.name as string });
 };
-const tabClose = (tabName: TabPanelName) => {
+const tabClose = (tabName: TabPaneName) => {
 	removeTab(tabName as string, route);
 };
 </script>

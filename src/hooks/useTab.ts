@@ -1,6 +1,5 @@
-import { Menu, M } from "./useMenu";
 import router from "@/router";
-import { RouteLocationNormalized, RouteRecordRaw } from "vue-router";
+import { RouteLocationNormalized, RouteRecordRaw, Menu, RouteMenu } from "vue-router";
 import { useStorage } from "@vueuse/core";
 import { C } from "@/constants";
 
@@ -20,7 +19,7 @@ export const useTab = () => {
 	const addHistoryTab = (route: RouteLocationNormalized) => {
 		if (!route.meta?.menu) return;
 
-		const menu: Menu = { ...(route.meta as M)?.menu, route: route.name as string };
+		const menu: Menu = { ...(route.meta as RouteMenu)?.menu, route: route.name as string };
 		const isHas = history.value.some(menu => menu.route == route.name);
 		if (!isHas) history.value.push(menu);
 		if (history.value.length > 10) {
