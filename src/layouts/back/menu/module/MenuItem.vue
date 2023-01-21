@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Menu } from "@/types/menu";
 import { PropType } from "vue";
 import { useScreenPixel } from "@/hooks/useScreenPixel";
-import { useMenu } from "@/hooks/useMenu";
+import { useMenu, Menu } from "@/hooks/useMenu";
 const props = defineProps({
 	subMenu: {
 		type: Array as PropType<Menu[]>,

@@ -35,10 +35,6 @@
 	--b-c-bg-thirdly: var(--b-c-gray-1);
 }
 
-// ::-webkit-scrollbar {
-// 	display: none;
-// }
-
 /* 修复火狐浏览器的滚轮样式问题 */
 * {
 	scrollbar-width: none;

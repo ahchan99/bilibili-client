@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { CommentProp } from "@/types/comment";
-import useComment from "./useComment";
+import { CommentProp } from "@/api/comment";
+import useCommentItem from "./useCommentItem";
 interface Props {
 	comment: CommentProp;
 }
 const props = defineProps<Props>();
 let className = "relative w-full text-primary overflow-hidden whitespace-pre-wrap align-baseline break-words float-left";
-const { renderStr } = useComment();
+const { renderStr } = useCommentItem();
 const content = computed(() => renderStr(props.comment.content, className));
 </script>
 

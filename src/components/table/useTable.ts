@@ -1,8 +1,8 @@
-import { CTableColumn } from "@/types/table";
 import { CheckboxValueType } from "element-plus";
+import { TableColumnOption } from "./module/TableHead.vue";
 
-export function useTable<T>(column: CTableColumn<T>[]) {
-	const columnsRef = ref<CTableColumn<T>[]>(column);
+export function useTable<T>(column: TableColumnOption<T>[]) {
+	const columnsRef = ref<TableColumnOption<T>[]>(column);
 
 	/**
 	 * @description 统计不包含宽度的列

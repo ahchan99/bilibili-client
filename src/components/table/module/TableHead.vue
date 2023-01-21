@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import TableOption from "./TableOption.vue";
+import TableHeadOption from "./TableHeadOption.vue";
+export type TableColumnOption<T> = import("./TableHeadOption.vue").TableColumnOption<T>;
 </script>
 
 <template>
 	<div class="h-[40px] w-full border-b border-base border-solid">
 		<slot name="title" />
-		<TableOption v-bind="$attrs" />
+		<TableHeadOption v-bind="$attrs" />
 		<slot />
 	</div>
 </template>

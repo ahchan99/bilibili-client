@@ -1,15 +1,34 @@
 import request from "@/utils/request";
-import { UserLoginCmd, UserInfoProp } from "@/types/user";
 
-export function userLogin(cmd: UserLoginCmd) {
+export interface UserProp {
+	id: string;
+	name: string;
+	avatar?: string;
+	level?: number;
+	isVip?: boolean;
+}
+
+export interface UserInfoProp extends UserProp {
+	permission: string;
+	roleList: string[];
+}
+
+export interface UserLoginParam {
+	phone?: string;
+	email?: string;
+	password: string;
+	captcha?: string;
+}
+
+export function login(param: UserLoginParam) {
 	return request<string>({
 		url: "/user-tokens",
 		method: "Post",
-		data: cmd
+		data: param
 	});
 }
 
-export function userLogout() {
+export function logout() {
 	return request({
 		url: "/logout",
 		method: "post"

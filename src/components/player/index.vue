@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import Danmaku from "@nplayer/danmaku";
 import { usePlayer } from "./usePlayer";
-import { BulletProp } from "@/types/bullet";
-import "./index.scss";
+export interface BulletOption {
+	color?: string; // 弹幕颜色
+	text: string; // 弹幕文字
+	time: number; // 弹幕出现时间
+	type?: "top" | "bottom" | "scroll"; // 弹幕类型，默认为滚动类型
+	isMe?: boolean; // 是否是当前用户发送的
+	force?: boolean; // 是否强制展示该弹幕（弹幕较多，并且是防碰撞模式时，可能会丢弃一部分弹幕）
+}
 interface Props {
 	src: string;
-	bullets: Array<BulletProp>;
+	bullets: Array<BulletOption>;
 }
 const props = defineProps<Props>();
 const { mirrorSwitch, quantitySelector, speedSelector, playStatePlugin, danmakuPlugin, volumePlugin, themePlugin } = usePlayer();
@@ -50,4 +56,6 @@ const { mirrorSwitch, quantitySelector, speedSelector, playStatePlugin, danmakuP
 		/>
 	</div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss">
+@import "./index.scss";
+</style>

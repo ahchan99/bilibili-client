@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import { CTableColumn } from "@/types/table";
 import { CheckboxValueType } from "element-plus";
-
-const modelValue = ref<string[]>([]);
+import type { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
+export type TableColumnOption<T> = Partial<TableColumnCtx<T>> & {
+	scoped?: string;
+	show?: boolean;
+	locked?: boolean;
+	initialWidth?: string;
+};
 
 interface Props {
-	columns: CTableColumn<any>[];
-	computedColumns: CTableColumn<any>[];
+	columns: TableColumnOption<any>[];
+	computedColumns: TableColumnOption<any>[];
 	filterColumns: (columns: CheckboxValueType[]) => void;
 	moveColumn: (index: number, sort: "ASC" | "DESC") => void;
 }
@@ -21,6 +25,8 @@ const props = withDefaults(defineProps<Props>(), {
 const calculateTop = () => {
 	return props.columns.findIndex(column => column.type === "selection") + 1;
 };
+
+const modelValue = ref<string[]>([]);
 
 watch(
 	props.computedColumns,

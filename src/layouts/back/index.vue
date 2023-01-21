@@ -17,4 +17,8 @@ import Main from "./main/index.vue";
 	</el-container>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+::-webkit-scrollbar {
+	display: none;
+}
+</style>

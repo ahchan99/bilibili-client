@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { PosterProp } from "@/types/poster";
-const animePosterList = ref<Array<PosterProp>>([
+import LargeSwiper, { PosterOption } from "@/components/large-swiper/index.vue";
+const animePosterList = ref<Array<PosterOption>>([
 	{
 		id: "1",
 		name: "间谍过家家",

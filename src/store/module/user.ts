@@ -1,7 +1,13 @@
 import { defineStore } from "pinia";
 import { getToken, setToken, removeToken } from "@/utils/cookies";
-import { UserInfoProp, UserLoginCmd } from "@/types/user";
-import { userLogin, userLogout, getUserInfo, getRSAPublicKey } from "@/api/user";
+import {
+	login as loginRequest,
+	logout as logoutRequest,
+	getUserInfo,
+	getRSAPublicKey,
+	UserInfoProp,
+	UserLoginParam
+} from "@/api/user";
 import JSEncrypt from "jsencrypt";
 import { isEmpty, isNull } from "@/utils/object";
 
@@ -24,15 +30,15 @@ export const userStore = defineStore("user", () => {
 		return !isEmpty(token.value);
 	});
 
-	async function login(cmd: UserLoginCmd, success: () => void, error: (err: any) => void) {
+	async function login(param: UserLoginParam, success: () => void, error: (err: any) => void) {
 		try {
 			// rsa 加密
 			const { data: rsaPublicKey } = await getRSAPublicKey();
 			let jsencrypt = new JSEncrypt();
 			jsencrypt.setPublicKey(rsaPublicKey);
-			cmd.password = jsencrypt.encrypt(cmd.password) as string;
+			param.password = jsencrypt.encrypt(param.password) as string;
 
-			const { data: authToken } = await userLogin(cmd);
+			const { data: authToken } = await loginRequest(param);
 			if (authToken) {
 				setToken(authToken);
 				token.value = authToken;
@@ -46,7 +52,7 @@ export const userStore = defineStore("user", () => {
 	}
 	async function logout(success: () => void, error: (err: any) => void) {
 		try {
-			await userLogout();
+			await logoutRequest();
 			token.value = "";
 			removeToken();
 			success();

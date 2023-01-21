@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { CTableColumn } from "@/types/table";
 import { useTable } from "./useTable";
 import TableHead from "./module/TableHead.vue";
+export type TableColumnOption<T> = import("./module/TableHead.vue").TableColumnOption<T>;
 
 interface Props {
-	columns: CTableColumn<any>[];
+	columns: TableColumnOption<any>[];
 	selectionIsNeeded?: boolean;
 	tableData: any[];
 	showHeader?: boolean;

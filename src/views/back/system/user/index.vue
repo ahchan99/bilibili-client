@@ -1,12 +1,70 @@
 <!-- 用户管理 -->
 <script setup lang="ts">
-import { User } from "@/types/user";
 import { useDataTable } from "@/hooks/useDataTable";
-import { setupUserAttributes } from "./design";
-
+import Table, { TableColumnOption } from "@/components/table/index.vue";
+interface User {
+	id?: number;
+	acount?: string;
+	password?: string;
+	avatar?: string;
+	name?: string;
+	email?: string;
+	create_time?: string;
+}
+const userColumns = computed<TableColumnOption<User>[]>(() => {
+	return [
+		{
+			type: "selection",
+			show: true,
+			width: "55"
+		},
+		{
+			prop: "id",
+			show: true,
+			label: "ID",
+			width: "55"
+		},
+		{
+			prop: "name",
+			show: true,
+			label: "名称",
+			width: "270"
+		},
+		{
+			prop: "acount",
+			show: true,
+			label: "账号",
+			width: "270"
+		},
+		{
+			prop: "password",
+			show: true,
+			label: "密码",
+			width: "270"
+		},
+		{
+			prop: "email",
+			show: true,
+			label: "邮箱",
+			width: "270"
+		},
+		{
+			prop: "create_time",
+			show: true,
+			label: "创建时间",
+			showOverflowTooltip: true
+		},
+		{
+			prop: "actions",
+			show: true,
+			label: "操作",
+			fixed: "right",
+			scoped: "actions",
+			width: "150"
+		}
+	];
+});
 const userUrl = "/users";
-const { userColumns } = setupUserAttributes();
-
 const {
 	ids,
 	loading,

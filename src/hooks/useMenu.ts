@@ -1,9 +1,24 @@
-import { Menu, M } from "@/types/menu";
 import { useStorage } from "@vueuse/core";
 import { C } from "@/constants";
 import router from "@/router";
-import { RouteLocationNormalizedLoaded, RouteRecordNormalized } from "vue-router";
-
+import { RouteMeta, RouteLocationNormalizedLoaded, RouteRecordNormalized } from "vue-router";
+interface IMenu {
+	title?: string;
+	icon?: string;
+	priority?: number;
+	isClick?: boolean;
+	route?: string;
+	path?: string;
+	iframe_link?: string;
+	children?: IMenu[];
+}
+export interface Menu extends IMenu {
+	// 是否为嵌套路由
+	nested?: boolean;
+}
+export interface M extends RouteMeta {
+	menu?: Menu;
+}
 const menus = ref<Menu[]>([]);
 const close = useStorage<boolean>(C.MENU_CLOSE_STATE, false);
 // 根据路由元数据构建菜单列表

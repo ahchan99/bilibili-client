@@ -1,5 +1,4 @@
 import request from "@/utils/request";
-import { DataTable } from "@/types/dataTable";
 
 class DataTableFactory<T, U> {
 	dataSource = ref<T[]>([]);
@@ -46,13 +45,18 @@ export function useDataTable<T, U = any>(url: string) {
 		}
 		const params = getQueryParams();
 		loading.value = true;
+
+		interface DataTable<T> {
+			array: T[];
+			total: number;
+		}
 		return await request<DataTable<T>>({
 			url: url,
 			method: "get",
 			params: params
 		}).then(res => {
-			dataSource.value = res.data!.array as any[];
-			pagination.value.total = res.data!.total;
+			dataSource.value = res.data.array as any[];
+			pagination.value.total = res.data.total;
 			loading.value = false;
 		});
 	};

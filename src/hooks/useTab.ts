@@ -1,4 +1,4 @@
-import { Menu, M } from "@/types/menu";
+import { Menu, M } from "./useMenu";
 import router from "@/router";
 import { RouteLocationNormalized, RouteRecordRaw } from "vue-router";
 import { useStorage } from "@vueuse/core";

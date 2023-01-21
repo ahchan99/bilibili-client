@@ -3,9 +3,8 @@ import CommentInput from "./module/CommentInput.vue";
 import CommentItem from "./module/CommentItem.vue";
 import CommentSubItem from "./module/CommentSubItem.vue";
 import CommentToolbar from "./module/CommentToolbar.vue";
-import { CommentProp, CommentSubmitParam, CommentInputSubmitParam } from "@/types/comment";
-import { UserProp } from "@/types/user";
-import { PageProp } from "@/types/page";
+import { CommentProp, CommentSubmitParam, CommentInputSubmitParam } from "@/api/comment";
+import { UserProp } from "@/api/user";
 import hashStr from "@/utils/hashStr";
 import { isNull, isEmpty } from "@/utils/object";
 interface Props {
@@ -27,7 +26,7 @@ const emit = defineEmits<{
 	(e: "submit", { content, parentId, targetId, finish }: CommentSubmitParam): void;
 	(e: "like", id: string, finish: () => void): void;
 	(e: "dislike", id: string, finish: () => void): void;
-	(e: "replyPage", parentId: string, page: PageProp, finish: () => void): void;
+	(e: "replyPage", parentId: string, page: PaginationParam, finish: () => void): void;
 }>();
 const isExpended = ref(false);
 const isLoading = ref(false);

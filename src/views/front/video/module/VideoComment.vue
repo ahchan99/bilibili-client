@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CommentProp, CommentSubmitParam } from "@/types/comment";
+import { CommentProp, CommentSubmitParam } from "@/api/comment";
 import VideoCommentTab from "./VideoCommentTab.vue";
 const commentList = ref<Array<CommentProp>>([]);
 const total = ref(0);

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CommentProp } from "@/types/comment";
-import { UserProp } from "@/types/user";
+import { CommentProp } from "@/api/comment";
+import { UserProp } from "@/api/user";
 interface Props {
 	comment: CommentProp;
 	offset?: number;
