@@ -8,7 +8,9 @@ module.exports = {
 				webside: "1050px"
 			},
 			screens: {
-				base: "1080px"
+				base: "1080px",
+				"1.5xl": "1400px",
+				"3xl": "1700px"
 			},
 			fontSize: {
 				tiny: "13px"

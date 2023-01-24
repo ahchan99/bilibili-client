@@ -244,6 +244,7 @@ function search(keyword?: any) {
 		border-radius: 8px;
 		opacity: 0.9;
 		transition: background-color 0.2s;
+		@apply px-[2px];
 		&:hover {
 			background-color: #ffffff;
 			opacity: 1;

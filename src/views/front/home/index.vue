@@ -1,11 +1,14 @@
 <!-- 首页 -->
 <script setup lang="ts">
 import HomeBanner from "./module/HomeBanner.vue";
+import HomeChannel from "./module/HomeChannel.vue";
+import HomeRecommend from "./module/HomeRecommend.vue";
 </script>
 
 <template>
 	<HomeBanner />
-	<div class="h-[2000px]">首页</div>
+	<HomeChannel />
+	<HomeRecommend />
 </template>
 
 <style lang="scss" scoped></style>

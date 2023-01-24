@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CommentInputEmojiPopover from "./CommentInputEmojiPopover.vue";
-import { isEmpty, isNull } from "@/utils/object";
+import { isNull } from "@/utils/object";
 import { CommentInputSubmitParam } from "@/api/comment";
 import { userStore } from "@/store";
 interface Props {
@@ -19,9 +19,6 @@ const isExpended = ref(false);
 const store = userStore();
 
 function onSubmit() {
-	if (isEmpty(content.value)) {
-		return;
-	}
 	emit("submit", {
 		content: content.value,
 		parentId: isNull(props.parentId, null),

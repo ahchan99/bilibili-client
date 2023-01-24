@@ -7,6 +7,7 @@ import { CommentProp, CommentSubmitParam, CommentInputSubmitParam } from "@/api/
 import { UserProp } from "@/api/user";
 import hashStr from "@/utils/hashStr";
 import { isNull, isEmpty } from "@/utils/object";
+import useLoginDialog from "@/hooks/useLoginDialog";
 interface Props {
 	total: number; // 评论总数
 	data: Array<CommentProp>;
@@ -35,8 +36,13 @@ const isDisabled = computed(() => isLoading.value || isFinished.value);
 const replyKey = ref("");
 const replyId = ref("");
 const replyName = ref("");
+const { checkLogin } = useLoginDialog();
 
 function onReplyOpen(user: UserProp, index: number) {
+	if (!checkLogin()) {
+		return;
+	}
+
 	const key = hashStr(index.toString(), "reply");
 	// 点击第二次关闭
 	if (replyKey.value === key) {
@@ -59,7 +65,13 @@ function onLoad() {
 }
 
 function onSubmit(param: CommentInputSubmitParam) {
+	if (!checkLogin()) {
+		return;
+	}
 	let { content, parentId } = param;
+	if (isEmpty(content)) {
+		return;
+	}
 	emit("submit", {
 		content,
 		parentId: isNull(parentId, null), // 评论 or 回复
@@ -88,8 +100,16 @@ function onSubmit(param: CommentInputSubmitParam) {
 	});
 }
 
-function onLike() {}
-function onDislike() {}
+function onLike() {
+	if (!checkLogin()) {
+		return;
+	}
+}
+function onDislike() {
+	if (!checkLogin()) {
+		return;
+	}
+}
 
 const onCurrentChange = (val: number) => {
 	console.log(`current page: ${val}`);

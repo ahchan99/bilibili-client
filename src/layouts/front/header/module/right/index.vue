@@ -2,11 +2,12 @@
 import HeaderAvatar from "./module/HeaderAvatar.vue";
 import HeaderUpload from "./module/HeaderUpload.vue";
 import useLoginDialog from "@/hooks/useLoginDialog";
+const { showLoginDialog } = useLoginDialog();
 </script>
 
 <template>
 	<li class="entry-item">
-		<span class="entry-outside cursor-pointer" @click="useLoginDialog">
+		<span class="entry-outside cursor-pointer" @click="showLoginDialog">
 			<HeaderAvatar />
 		</span>
 	</li>
