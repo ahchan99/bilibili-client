@@ -143,6 +143,9 @@ export function usePlayer() {
 						// 6. 添加清晰度对应元素
 						_this.itemElements = hls.levels.map((l, i) => {
 							const el = document.createElement("div");
+							if (l.name === "") {
+								return el;
+							}
 							el.textContent = l.name + "P";
 							if (l.height === 1080) el.textContent += " 超清";
 							if (l.height === 720) el.textContent += " 高清";
@@ -270,6 +273,10 @@ export function usePlayer() {
 		}
 	};
 
+	const loadingDom = new Image();
+	loadingDom.src = new URL(`../../assets/images/loading.gif`, import.meta.url).href;
+	loadingDom.classList.add("nplayer_loading");
+
 	return {
 		mirrorSwitch,
 		quantitySelector,
@@ -277,6 +284,7 @@ export function usePlayer() {
 		playStatePlugin,
 		danmakuPlugin,
 		volumePlugin,
-		themePlugin
+		themePlugin,
+		loadingDom
 	};
 }

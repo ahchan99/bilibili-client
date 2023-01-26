@@ -5,7 +5,9 @@ import HeaderRightEntry from "./module/right/index.vue";
 import HeaderSearch from "./module/HeaderSearch.vue";
 
 const isFixed = ref(false);
+const isSearchHide = ref(true);
 const unFixedPathMap = new Set(["", "anime"]);
+const searchInputHideMap = new Set(["search"]);
 const router = useRouter();
 let timer: NodeJS.Timer;
 const onScroll = () => {
@@ -30,6 +32,7 @@ watch(
 			isFixed.value = true;
 			document.removeEventListener("scroll", onScroll);
 		}
+		isSearchHide.value = searchInputHideMap.has(currentPath);
 	},
 	{ immediate: true, deep: true }
 );
@@ -40,7 +43,7 @@ watch(
 		<ul class="entry-container mr-4">
 			<HeaderLeftEntry :isFixed="isFixed" />
 		</ul>
-		<div class="entry-container flex-1">
+		<div v-if="!isSearchHide" class="entry-container flex-1">
 			<HeaderSearch />
 		</div>
 		<ul class="entry-container ml-4 justify-end">

@@ -3,15 +3,12 @@ const isFocus = ref(false);
 const searchFromDom = ref();
 const searchDefault = ref("");
 const searchValue = ref("");
-const suggestShow = ref(false);
-
+const router = useRouter();
 function input() {}
 function focus() {}
-function search(keyword?: any) {
-	if (!(keyword instanceof Event) && keyword) {
-		searchValue.value = keyword;
-		suggestShow.value = false;
-	}
+function search() {
+	let keyword = searchValue.value;
+	router.push({ path: "search", query: { keyword } });
 }
 </script>
 
@@ -244,7 +241,7 @@ function search(keyword?: any) {
 		border-radius: 8px;
 		opacity: 0.9;
 		transition: background-color 0.2s;
-		@apply px-[2px];
+		@apply pl-[4px] pr-12;
 		&:hover {
 			background-color: #ffffff;
 			opacity: 1;

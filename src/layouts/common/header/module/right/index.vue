@@ -48,7 +48,7 @@ const { showLoginDialog } = useLoginDialog();
 		</a>
 	</li>
 	<li class="entry-item">
-		<a class="entry-title" href="#">
+		<a class="entry-title" href="/upload">
 			<HeaderUpload />
 		</a>
 	</li>

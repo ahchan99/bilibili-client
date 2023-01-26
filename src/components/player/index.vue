@@ -14,18 +14,19 @@ interface Props {
 	bullets: Array<BulletOption>;
 }
 const props = defineProps<Props>();
-const { mirrorSwitch, quantitySelector, speedSelector, playStatePlugin, danmakuPlugin, volumePlugin, themePlugin } = usePlayer();
+const { mirrorSwitch, quantitySelector, speedSelector, playStatePlugin, danmakuPlugin, volumePlugin, themePlugin, loadingDom } =
+	usePlayer();
 </script>
 
 <template>
 	<div class="relative w-full h-full">
 		<n-player
-			crossOrigin="anonymous"
 			:options="{
 				themeColor: 'rgba(35,173,229, 1)',
 				progressBg: 'rgba(35,173,229, 1)',
 				volumeProgressBg: 'rgba(35,173,229, 1)',
 				posterEnable: false,
+				loadingEl: loadingDom,
 				plugins: [
 					new Danmaku({ autoInsert: true, items: props.bullets }),
 					playStatePlugin,

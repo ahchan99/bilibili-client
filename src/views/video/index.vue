@@ -34,7 +34,7 @@ import VideoUpInfo from "./module/VideoUpInfo.vue";
 			</div>
 		</div>
 		<div class="relative flex flex-col items-start flex-shrink-0 w-[350px] ml-[30px]">
-			<div class="sticky w-full">
+			<div class="sticky w-full -z-10">
 				<div class="pt-[15px] w-full">
 					<VideoUpInfo />
 				</div>
