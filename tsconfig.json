@@ -33,7 +33,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "typings/**/*.d.ts"
+    "typings/**/*.d.ts",
+    "src/views/upload/useUpload.ts"
   ],
   "references": [
     {

@@ -2,7 +2,7 @@ import { RouteRecordRaw } from "vue-router";
 
 export default {
 	path: "/",
-	name: "frontdesk",
+	name: "common",
 	component: () => import("@/layouts/common/index.vue"),
 	children: [
 		{

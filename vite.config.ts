@@ -7,6 +7,7 @@ import IconsResolver from "unplugin-icons/resolver";
 import Icons from "unplugin-icons/vite";
 import { viteMockServe } from "vite-plugin-mock";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 
 import path from "path";
 const srcPath = path.resolve(__dirname, "src");
@@ -31,6 +32,7 @@ export default ({ mode }) => {
 		},
 		plugins: [
 			vue(),
+			vueJsx(),
 			viteMockServe({
 				supportTs: true,
 				logger: false,
